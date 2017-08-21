@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 const TodoItem = require('./todoItem');
+const AddItem = require('./AddItem');
 require('./css/index.css');
 
 // Create component
@@ -34,6 +35,7 @@ let TodoComponent = React.createClass({
                 <p>{this.state.age}</p>
                 <p onClick={this.clicked}>Test text with onclick</p>
                 <ul>{todos}</ul>
+                <AddItem onAdd={this.onAdd}/>
 
             <h1>Hello!</h1>
             <p>{this.props.message}</p>
@@ -47,6 +49,14 @@ let TodoComponent = React.createClass({
 
     clicked: function(){
         console.log('this has been clicked');
+    },
+
+    onAdd: function(item){
+        let updatedTodos = this.state.todos;
+          updatedTodos.push(item);
+        this.setState({
+            todos:updatedTodos
+        });
     },
 
     onDelete: function(item){
