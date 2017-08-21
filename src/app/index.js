@@ -8,7 +8,7 @@ let TodoComponent = React.createClass({
 
     getInitialState: function(){
         return {
-        todos: ['do thing A', 'do thing B', 'do thing C'],
+        todos: ['do thing A', 'do thing B', 'do thing C', 'do thing D'],
         age: 30
         }
     },
@@ -17,7 +17,7 @@ let TodoComponent = React.createClass({
         let todos = this.state.todos;
         todos = todos.map(function(item, index){
            return(
-               <li>{item.toUpperCase()}</li>
+               <TodoItem item={item} key={index}/>
            )
         });
         let ager = setTimeout(function(){
@@ -41,6 +41,19 @@ let TodoComponent = React.createClass({
 
         );
     }
+});
+
+//Second component
+let TodoItem = React.createClass({
+   render: function(){
+       return(
+           <li>
+               <div className="todo-item">
+               <span className="item-name">{this.props.item}</span>
+               </div>
+           </li>
+       )
+   }
 });
 
 let myFish ={ name: 'Salmon', smellFactor: 'Smelly smell', price:'19.90'};
