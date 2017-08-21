@@ -8,19 +8,29 @@ let TodoComponent = React.createClass({
 
     getInitialState: function(){
         return {
-        todos: ['do thing A', 'do thing B', 'do thing C']
+        todos: ['do thing A', 'do thing B', 'do thing C'],
+        age: 30
         }
     },
 
     render: function(){
+        let todos = this.state.todos;
+        todos = todos.map(function(item, index){
+           return(
+               <li>{item.toUpperCase()}</li>
+           )
+        });
+        let ager = setTimeout(function(){
+           this.setState({
+               age:35
+           })
+        }.bind(this), 5000);
+
         return (
             <div id="todo-list">
+                <p>{this.state.age}</p>
                 <p>Test text</p>
-                <ul>
-                    <li>{this.state.todos[0]}</li>
-                    <li>{this.state.todos[1]}</li>
-                    <li>{this.state.todos[2]}</li>
-                </ul>
+                <ul>{todos}</ul>
 
             <h1>Hello!</h1>
             <p>{this.props.message}</p>
