@@ -17,9 +17,9 @@ let TodoComponent = React.createClass({
         let todos = this.state.todos;
         todos = todos.map(function(item, index){
            return(
-               <TodoItem item={item} key={index}/>
+               <TodoItem item={item} key={index} onDelete={this.onDelete}/>
            )
-        });
+        }.bind(this));
         let ager = setTimeout(function(){
            this.setState({
                age:35
@@ -29,7 +29,7 @@ let TodoComponent = React.createClass({
         return (
             <div id="todo-list">
                 <p>{this.state.age}</p>
-                <p>Test text</p>
+                <p onClick={this.clicked}>Test text with onclick</p>
                 <ul>{todos}</ul>
 
             <h1>Hello!</h1>
@@ -40,6 +40,19 @@ let TodoComponent = React.createClass({
             </div>
 
         );
+    },
+
+    clicked: function(){
+        console.log('this has been clicked');
+    },
+
+    onDelete: function(item){
+        let updatedTodos = this.state.todos.filter(function(val,index){
+            return item !== val;
+        });
+        this.setState({
+            todos:updatedTodos
+        });
     }
 });
 
@@ -50,9 +63,13 @@ let TodoItem = React.createClass({
            <li>
                <div className="todo-item">
                <span className="item-name">{this.props.item}</span>
+               <span className="item-delete" onClick={this.handleDelete}> X </span>
                </div>
            </li>
        )
+   },
+   handleDelete: function(){
+       this.props.onDelete(this.props.item);
    }
 });
 
